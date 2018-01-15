@@ -50,12 +50,14 @@ function openCard(card) {
     // if yes check to see if the two cards match
     //if the cards do not match, remove the cards from the list and hide the card's symbol
     if($(openedCards[0]).children().first().attr('class') !== $(openedCards[1]).children().first().attr('class')) {
-        $(openedCards).removeClass('open show');
-        openedCards = [];
-        }
+        setTimeout(function(){
+            $(openedCards).removeClass('open show');
+            $(openedCards).addClass('animated shake');
+            openedCards = [];
+            } , 500);        
     //if the cards do match, lock the cards in the open position
-    else{
-        $(openedCards).addClass('match');
+    } else{
+        $(openedCards).addClass('match animated rubberBand');
         openedCards = [];
         };
     // increment the move counter and display it on the page
