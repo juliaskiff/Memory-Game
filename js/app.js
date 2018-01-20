@@ -71,6 +71,7 @@ function openCard(card) {
         };
     // increment the move counter and display it on the page
     countMove();
+    getStars();
     }; 
 };
 
@@ -100,7 +101,13 @@ function gameWon(){
              $('.modal-container').css('display', 'none');
         })
         $('.time').html(seconds);
-        $('.raiting').html(raiting);
+        if (raiting == 1){
+            $('.raiting').html('<i class="fa fa-star"><i class="fa fa-star-o"><i class="fa fa-star-o">')
+        } else if (raiting == 2){
+            $('.raiting').html('<i class="fa fa-star"><i class="fa fa-star"><i class="fa fa-star-o">');
+        } else if (raiting == 3){
+            $('.raiting').html('<i class="fa fa-star"><i class="fa fa-star"><i class="fa fa-star">');
+};
     }
 }
 
@@ -112,4 +119,17 @@ const timerId = setInterval(function(){
         $('#span-timer').html(seconds);
     }       
 }, 1000);
+
+let raiting;
+function getStars(){    
+    if(counter == 14){
+        $('.score-panel li i').eq(2).removeClass('fa-star').addClass('fa-star-o');
+        raiting = 2;
+    } else if (counter == 20 ){
+        $('.score-panel li i').eq(1).removeClass('fa-star').addClass('fa-star-o');
+        raiting = 1;
+    } else if (counter < 14){   
+        raiting = 3;
+    };   
+};
 
