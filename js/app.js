@@ -113,7 +113,3 @@ const timerId = setInterval(function(){
     }       
 }, 1000);
 
-
-/*
- *    +  (put this functionality in another function that you call from this one)
- */
