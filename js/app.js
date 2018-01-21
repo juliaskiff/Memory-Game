@@ -1,11 +1,12 @@
-/*
- * Create a list that holds all of your cards
- */
+//List of the cards
 let cards = ['fa fa-diamond', 'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-bolt', 'fa fa-cube', 'fa fa-cube', 'fa fa-leaf', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bicycle', 'fa fa-bomb', 'fa fa-bomb'];
+
+//Variables
 let openedCards = [];
 let imgFound =  0;
 let counter = 0;
-
+let gameStarted = false;
+let seconds = 0;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -17,27 +18,25 @@ function shuffle(array) {
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
-    }
-
+    };
     return array;
 };
 
 //Display the cards on the page:
 
-//shuffle the list of cards using the "shuffle" method
+    //shuffle the list of cards using the "shuffle" method
 cards = shuffle(cards);
 
-// loop through each card and create its HTML
+    // loop through each card and create its HTML
 let cardHtml = '';
 for (const card of cards){  
     cardHtml += `<li class="card"><i class="${card}"></i></li>`;
 }
 
-// add each card's HTML to the page
+    // add each card's HTML to the page
 $('.deck').html(cardHtml);
 
-let gameStarted = false;
-
+//Flip the card when it is clicked
 $('.card').on('click', function(){    
     gameStarted = true;
     if(!$(this).hasClass('open')){
@@ -48,7 +47,7 @@ $('.card').on('click', function(){
     };
 });
 
-// add the card to a *list* of "open" cards 
+//Add the card to a *list* of "open" cards 
 function openCard(card) {
     
     openedCards.push(card);
@@ -78,6 +77,7 @@ function openCard(card) {
     }; 
 };
 
+//Move Counter
 function countMove(){
     counter ++;
     $('.moves').html(counter);  
@@ -87,10 +87,10 @@ function countMove(){
 function restart(){
     $('.restart').on('click', function(){
         location.reload();
-    })
+    });
 };
 
-//if all cards have matched, display a message with the final score
+//Congratulations Popup
 function gameWon(){
     if (imgFound == cards.length/2){
         clearInterval(timerId);
@@ -102,7 +102,7 @@ function gameWon(){
         });
         $('.no-btn').on('click', function(){
              $('.modal-container').css('display', 'none');
-        })
+        });
         $('.time').html(seconds);
         if (raiting == 1){
             $('.raiting').html('<i class="fa fa-star"><i class="fa fa-star-o"><i class="fa fa-star-o">')
@@ -111,18 +111,18 @@ function gameWon(){
         } else if (raiting == 3){
             $('.raiting').html('<i class="fa fa-star"><i class="fa fa-star"><i class="fa fa-star">');
         };
-    }
-}
+    };
+};
 
-//timer
-let seconds = 0;
+//Timer
 const timerId = setInterval(function(){
     if(gameStarted != false){
         seconds++;
         $('#span-timer').html(seconds);
-    }       
+    };       
 }, 1000);
 
+//Star rating
 let raiting;
 function getStars(){    
     if(counter == 14){
