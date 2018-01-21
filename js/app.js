@@ -52,20 +52,23 @@ $('.card').on('click', function(){
 function openCard(card) {
     
     openedCards.push(card);
-  // check if open_card array contains more than one cards
+    // check if open_card array contains more than one cards
     if (openedCards.length > 1) {
     // if yes check to see if the two cards match
     //if the cards do not match, remove the cards from the list and hide the card's symbol
+        if ($(openedCards).hasClass('animated shake')){
+                    $(openedCards).removeClass('animated shake')
+                };
         if($(openedCards[0]).children().first().attr('class') !== $(openedCards[1]).children().first().attr('class')) {
             setTimeout(function(){
                 $(openedCards).removeClass('open show');
                 $(openedCards).addClass('animated shake');
                 openedCards = [];
-            } , 500);        
+            }, 500);        
     //if the cards do match, lock the cards in the open position
-        } else{
-            $(openedCards).addClass('match');
-            $(openedCards).addClass('animated rubberBand');
+        } else {
+            $(openedCards).removeClass('animated shake');
+            $(openedCards).addClass('animated flash match');
             openedCards = [];
             imgFound++;
         };
@@ -107,7 +110,7 @@ function gameWon(){
             $('.raiting').html('<i class="fa fa-star"><i class="fa fa-star"><i class="fa fa-star-o">');
         } else if (raiting == 3){
             $('.raiting').html('<i class="fa fa-star"><i class="fa fa-star"><i class="fa fa-star">');
-};
+        };
     }
 }
 
